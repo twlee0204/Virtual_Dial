@@ -11,6 +11,21 @@
 
 ---
 
+## 🎥 시연 영상
+
+각 썸네일을 누르면 해당 YouTube 영상이 열립니다.
+
+### 기능 변경 및 테마 설정
+[![영상 1 재생](https://img.youtube.com/vi/xMczIJHDzN8/hqdefault.jpg)](https://youtu.be/xMczIJHDzN8)
+
+### 조작감도 설정
+[![영상 2 재생](https://img.youtube.com/vi/1venuiGalJo/hqdefault.jpg)](https://youtu.be/1venuiGalJo)
+
+### 기능 시연
+[![영상 3 재생](https://img.youtube.com/vi/40bP2cwWB1M/hqdefault.jpg)](https://youtu.be/40bP2cwWB1M)
+
+---
+
 ## 🖥 개발 및 테스트 환경 (Environment & Specs)
 공모전 심사 및 검증 시 아래 환경을 권장합니다.
 
