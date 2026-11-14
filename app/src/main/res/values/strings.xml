@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">코너 다이얼</string>
+    <string name="title">코너 다이얼</string>
+    <string name="subtitle">원을 그리며 돌려 조절하세요</string>
+
+    <string name="left_dial_label">왼쪽 다이얼</string>
+    <string name="right_dial_label">오른쪽 다이얼</string>
+    <string name="dial_hint">시계 방향 증가 · 반시계 방향 감소</string>
+    <string name="prev_function">이전 기능</string>
+    <string name="next_function">다음 기능</string>
+
+    <string name="sensitivity_title">조작 감도</string>
+    <string name="sensitivity_low">낮음</string>
+    <string name="sensitivity_normal">보통</string>
+    <string name="sensitivity_high">높음</string>
+    <string name="sensitivity_desc_low">넓게 돌려야 조절됩니다. 주행 중 오조작 방지</string>
+    <string name="sensitivity_desc_normal">표준 감도입니다</string>
+    <string name="sensitivity_desc_high">조금만 돌려도 조절됩니다</string>
+
+    <string name="overlay_title">모든 화면에서 사용</string>
+    <string name="overlay_off">꺼짐</string>
+    <string name="overlay_on">켜짐 · 화면 아래 모서리를 길게 누른 뒤 돌려 조절</string>
+    <string name="overlay_need_permission">‘다른 앱 위에 표시’ 권한이 필요합니다</string>
+    <string name="overlay_unsupported">이 기기에서는 사용할 수 없습니다</string>
+    <string name="overlay_failed">오버레이를 표시하지 못해 껐습니다</string>
+
+    <string name="color_title">포인트 색상</string>
+    <string name="color_blue">블루</string>
+    <string name="color_green">그린</string>
+    <string name="color_amber">앰버</string>
+    <string name="color_silver">실버</string>
+
+    <string name="direction_increase">▲ 증가</string>
+    <string name="direction_decrease">▼ 감소</string>
+
+    <string name="notification_channel">코너 다이얼</string>
+    <string name="notification_title">코너 다이얼 사용 중</string>
+    <string name="notification_text">화면 아래 모서리를 길게 누른 뒤 돌려 조절할 수 있습니다</string>
+</resources>

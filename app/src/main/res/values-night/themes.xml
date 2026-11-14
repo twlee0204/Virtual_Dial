@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 야간: 시스템 바 아이콘을 밝게. 나머지는 values/themes.xml 의 스타일을 그대로 사용. -->
+    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pleos_accent</item>
+        <item name="colorPrimaryVariant">@color/pleos_accent</item>
+        <item name="colorOnPrimary">@color/pleos_on_accent</item>
+        <item name="colorSecondary">@color/pleos_accent</item>
+        <item name="colorOnSecondary">@color/pleos_on_accent</item>
+        <item name="colorSurface">@color/pleos_surface</item>
+        <item name="colorOnSurface">@color/pleos_text_primary</item>
+        <item name="android:colorBackground">@color/pleos_bg</item>
+        <item name="android:windowBackground">@color/pleos_bg</item>
+        <item name="android:statusBarColor">@color/pleos_bg</item>
+        <item name="android:navigationBarColor">@color/pleos_bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:textColorPrimary">@color/pleos_text_primary</item>
+        <item name="android:textColorSecondary">@color/pleos_text_secondary</item>
+    </style>
+</resources>

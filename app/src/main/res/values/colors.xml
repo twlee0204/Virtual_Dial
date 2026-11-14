@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  시맨틱 컬러 토큰 (주간 / Day).
+  야간 값은 values-night/colors.xml 에 동일한 이름으로 정의되어 있다.
+  Pleos 공식 컬러 토큰 값이 확정되면 이 두 파일의 값만 교체하면 전체 UI에 반영된다.
+  모든 텍스트/배경 조합은 WCAG 4.5:1 이상 (ColorContrastTest 로 검증).
+-->
+<resources>
+    <color name="pleos_bg">#F2F3F5</color>
+    <color name="pleos_surface">#FFFFFF</color>
+    <color name="pleos_surface_variant">#E6E8EC</color>
+    <color name="pleos_popup">#FFFFFF</color>
+    <color name="pleos_divider">#C9CDD3</color>
+    <color name="pleos_track">#D5D9DF</color>
+
+    <color name="pleos_text_primary">#14161A</color>
+    <color name="pleos_text_secondary">#565B64</color>
+
+    <color name="pleos_accent">#0B63CE</color>
+    <color name="pleos_on_accent">#FFFFFF</color>
+
+    <!-- 다이얼 포인트 컬러 (사용자 선택) -->
+    <color name="dial_blue">#0B63CE</color>
+    <color name="dial_green">#087037</color>
+    <color name="dial_amber">#8F5200</color>
+    <color name="dial_gray">#44474E</color>
+</resources>

@@ -1,0 +1,53 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Pleos 가이드: 주/야간 지원, 큰 터치 타겟, 플랫한 표면 -->
+    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pleos_accent</item>
+        <item name="colorPrimaryVariant">@color/pleos_accent</item>
+        <item name="colorOnPrimary">@color/pleos_on_accent</item>
+        <item name="colorSecondary">@color/pleos_accent</item>
+        <item name="colorOnSecondary">@color/pleos_on_accent</item>
+        <item name="colorSurface">@color/pleos_surface</item>
+        <item name="colorOnSurface">@color/pleos_text_primary</item>
+        <item name="android:colorBackground">@color/pleos_bg</item>
+        <item name="android:windowBackground">@color/pleos_bg</item>
+        <item name="android:statusBarColor">@color/pleos_bg</item>
+        <item name="android:navigationBarColor">@color/pleos_bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:textColorPrimary">@color/pleos_text_primary</item>
+        <item name="android:textColorSecondary">@color/pleos_text_secondary</item>
+    </style>
+
+    <!-- 텍스트 스타일: 최소 14sp, 주요 정보는 20sp 이상 -->
+    <style name="TextAppearance.Pleos.Headline" parent="">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/pleos_text_primary</item>
+    </style>
+    <style name="TextAppearance.Pleos.Title" parent="">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/pleos_text_primary</item>
+    </style>
+    <style name="TextAppearance.Pleos.Body" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/pleos_text_primary</item>
+    </style>
+    <style name="TextAppearance.Pleos.Label" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/pleos_text_secondary</item>
+    </style>
+
+    <!-- 버튼: 최소 64dp, 둥근 모서리 16dp -->
+    <style name="Widget.Pleos.Button" parent="Widget.AppCompat.Button">
+        <item name="android:minHeight">64dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:background">@drawable/bg_segment</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:padding">8dp</item>
+    </style>
+</resources>

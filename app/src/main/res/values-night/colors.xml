@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 시맨틱 컬러 토큰 (야간 / Night). 값 교체 시 ColorContrastTest 로 대비를 재검증할 것. -->
+<resources>
+    <color name="pleos_bg">#131417</color>
+    <color name="pleos_surface">#1D1E21</color>
+    <color name="pleos_surface_variant">#2A2B2F</color>
+    <color name="pleos_popup">#313236</color>
+    <color name="pleos_divider">#44464E</color>
+    <color name="pleos_track">#44464E</color>
+
+    <color name="pleos_text_primary">#FFFFFF</color>
+    <color name="pleos_text_secondary">#B4B8BF</color>
+
+    <color name="pleos_accent">#4DA3FF</color>
+    <color name="pleos_on_accent">#0B0C0E</color>
+
+    <color name="dial_blue">#4DA3FF</color>
+    <color name="dial_green">#2EDB8A</color>
+    <color name="dial_amber">#FFB020</color>
+    <color name="dial_gray">#E0E1E6</color>
+</resources>

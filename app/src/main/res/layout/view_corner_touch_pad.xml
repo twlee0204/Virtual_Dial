@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  루트: 터치를 받는 영역(히트 영역). 투명화하지 않는다.
+  pad_visual: 눈에 보이는 요소. 평소 alpha=0, 조작 중에만 짧게 표시된다.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="144dp"
+    android:layout_height="144dp"
+    android:clickable="true"
+    android:focusable="false">
+
+    <FrameLayout
+        android:id="@+id/pad_visual"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@drawable/bg_touch_zone"
+        android:duplicateParentState="true">
+
+        <View
+            android:layout_width="116dp"
+            android:layout_height="116dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dial_guide_ring" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_pad_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="96dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/pleos_text_secondary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_pad_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="104dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/pleos_text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

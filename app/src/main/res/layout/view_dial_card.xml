@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 다이얼 카드: [이전] 기능 이름 [다음] / 원형 조작 영역 / 안내 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_cockpit_card"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/dial_prev"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_icon_button"
+            android:contentDescription="@string/prev_function"
+            android:src="@drawable/ic_chevron_left" />
+
+        <TextView
+            android:id="@+id/dial_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:textAppearance="@style/TextAppearance.Pleos.Title"
+            tools:text="공조 온도" />
+
+        <ImageButton
+            android:id="@+id/dial_next"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_icon_button"
+            android:contentDescription="@string/next_function"
+            android:src="@drawable/ic_chevron_right" />
+    </LinearLayout>
+
+    <com.example.myapplication.ui.SquareFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <FrameLayout
+            android:id="@+id/dial_zone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_touch_zone"
+            android:clickable="true"
+            android:focusable="false">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_dial_guide_ring" />
+
+            <TextView
+                android:id="@+id/dial_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Pleos.Headline"
+                tools:text="22.0°C" />
+        </FrameLayout>
+    </com.example.myapplication.ui.SquareFrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/dial_hint"
+        android:textAppearance="@style/TextAppearance.Pleos.Label" />
+</LinearLayout>
