@@ -14,7 +14,7 @@
 ## 🖥 개발 및 테스트 환경 (Environment & Specs)
 공모전 심사 및 검증 시 아래 환경을 권장합니다.
 
-* **Pleos Connect 에뮬레이터 버전**: Pleos Connect v2.0 (Android 14 / API Level 34)
+* **Pleos Connect 에뮬레이터 버전**: Pleos Connect v2.1.0 (Android 14 / API Level 34)
 * **화면 규격 (Display Specs)**: 
   * 디스플레이 형태: 가로 와이드 콕핏 디스플레이 (Wide Center Information Display)
   * 해상도 / 밀도: 1920 x 720 (또는 사용하신 에뮬레이터 해상도 입력) / mdpi (가로 600dp 이상 Dual Dial Card Layout 대응)
