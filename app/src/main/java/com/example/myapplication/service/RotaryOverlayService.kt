@@ -30,6 +30,7 @@ import com.example.myapplication.model.AppPreferences
 import com.example.myapplication.model.DialSide
 import com.example.myapplication.ui.CircularControlOverlayView
 import com.example.myapplication.ui.CircularGestureTouchListener
+import com.example.myapplication.util.BeepSoundHelper
 import kotlin.math.min
 
 /**
@@ -45,6 +46,7 @@ class RotaryOverlayService : Service() {
     private lateinit var windowManager: WindowManager
     private lateinit var appPreferences: AppPreferences
     private lateinit var themedContext: Context
+    private var beepSoundHelper: BeepSoundHelper? = null
 
     private var leftTouchView: View? = null
     private var rightTouchView: View? = null
@@ -70,6 +72,7 @@ class RotaryOverlayService : Service() {
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         appPreferences = AppPreferences(this)
         themedContext = ContextThemeWrapper(this, R.style.Theme_MyApplication)
+        beepSoundHelper = BeepSoundHelper(this)
 
         ContextCompat.registerReceiver(
             this,
@@ -184,6 +187,33 @@ class RotaryOverlayService : Service() {
         }
     }
 
+    private val touchDisableHandlers = mutableMapOf<View, android.os.Handler>()
+    private val touchDisableRunnables = mutableMapOf<View, Runnable>()
+
+    private fun setPadTouchable(view: View, touchable: Boolean) {
+        val params = view.layoutParams as? WindowManager.LayoutParams ?: return
+        if (touchable) {
+            params.flags = params.flags and WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE.inv()
+        } else {
+            params.flags = params.flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        }
+        runCatching { windowManager.updateViewLayout(view, params) }
+    }
+
+    private fun temporarilyDisableTouch(view: View, durationMs: Long = 3000L) {
+        setPadTouchable(view, false)
+        val handler = touchDisableHandlers.getOrPut(view) { android.os.Handler(android.os.Looper.getMainLooper()) }
+        val oldRunnable = touchDisableRunnables[view]
+        if (oldRunnable != null) {
+            handler.removeCallbacks(oldRunnable)
+        }
+        val newRunnable = Runnable {
+            setPadTouchable(view, true)
+        }
+        touchDisableRunnables[view] = newRunnable
+        handler.postDelayed(newRunnable, durationMs)
+    }
+
     private fun padParams(size: Int, gravityFlags: Int) = WindowManager.LayoutParams(
         size,
         size,
@@ -210,12 +240,22 @@ class RotaryOverlayService : Service() {
                 },
                 onRotationStep = { isClockwise, steps ->
                     val function = appPreferences.getFunction(side)
+                    val currentValue = appPreferences.getValue(function)
+                    if (function.isAtBoundary(currentValue, isClockwise)) {
+                        beepSoundHelper?.playBoundaryWarningBeep()
+                    } else {
+                        beepSoundHelper?.playStepBeep()
+                    }
                     val next = appPreferences.adjustValue(function, isClockwise, steps)
                     centerHudView?.updateValue(next, isClockwise)
                     updateTouchPadUI()
                     sendBroadcast(Intent(ACTION_SETTINGS_UPDATED).setPackage(packageName))
                 },
-                onGestureEnd = { centerHudView?.scheduleHide(HUD_HIDE_DELAY_MS) }
+                onGestureEnd = { centerHudView?.scheduleHide(HUD_HIDE_DELAY_MS) },
+                onShortTap = {
+                    // 짧은 탭/단순 터치 시: 해당 영역 아래의 다른 앱 버튼이 눌리도록 터치를 3초간 완전히 투과시킴
+                    temporarilyDisableTouch(view, 3000L)
+                }
             )
         )
     }
@@ -235,6 +275,11 @@ class RotaryOverlayService : Service() {
     }
 
     private fun detachOverlayViews() {
+        touchDisableHandlers.forEach { (view, handler) ->
+            touchDisableRunnables[view]?.let { handler.removeCallbacks(it) }
+        }
+        touchDisableHandlers.clear()
+        touchDisableRunnables.clear()
         // HUD 는 detach 시 스스로 콜백/애니메이션을 정리한다.
         centerHudView?.let { runCatching { windowManager.removeView(it) } }
         leftTouchView?.let { runCatching { windowManager.removeView(it) } }
@@ -251,6 +296,8 @@ class RotaryOverlayService : Service() {
             receiverRegistered = false
         }
         detachOverlayViews()
+        beepSoundHelper?.release()
+        beepSoundHelper = null
         super.onDestroy()
     }
 

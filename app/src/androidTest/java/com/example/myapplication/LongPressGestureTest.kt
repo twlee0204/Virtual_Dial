@@ -68,6 +68,19 @@ class LongPressGestureTest {
 
     @Test
     fun shortTap_doesNotActivate() {
+        var shortTapCalled = false
+        instrumentation.runOnMainSync {
+            view.setOnTouchListener(
+                CircularGestureTouchListener(
+                    longPressMs = LONG_PRESS_MS,
+                    getSensitivityDeg = { 10.0 },
+                    onGestureStart = { starts++ },
+                    onRotationStep = { _, count -> steps += count },
+                    onGestureEnd = { ends++ },
+                    onShortTap = { shortTapCalled = true }
+                )
+            )
+        }
         val t = SystemClock.uptimeMillis()
         send(MotionEvent.ACTION_DOWN, t, 320f, 200f)
         send(MotionEvent.ACTION_UP, t, 320f, 200f)
@@ -76,6 +89,7 @@ class LongPressGestureTest {
         assertEquals(0, starts)
         assertEquals(0, ends)
         assertEquals(0, steps)
+        assertTrue("onShortTap should be triggered", shortTapCalled)
     }
 
     @Test

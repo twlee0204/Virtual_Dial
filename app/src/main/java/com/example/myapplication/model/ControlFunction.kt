@@ -94,6 +94,12 @@ enum class ControlFunction(
         }
     }
 
+    /** 현재 수치가 최소/최대 한계에 다다랐고, 그 방향으로 추가 조작하는지 여부 */
+    fun isAtBoundary(current: Float, isClockwise: Boolean): Boolean {
+        val snapped = snapValue(current)
+        return (isClockwise && snapped >= maxValue) || (!isClockwise && snapped <= minValue)
+    }
+
     companion object {
         /** 저장된 이름으로부터 안전하게 복원한다. 알 수 없는 값이면 [default]. */
         fun fromName(name: String?, default: ControlFunction): ControlFunction {

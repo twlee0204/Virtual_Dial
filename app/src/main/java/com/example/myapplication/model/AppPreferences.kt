@@ -9,8 +9,9 @@ import android.content.SharedPreferences
  */
 class AppPreferences(context: Context) {
 
+    private val appContext: Context = context.applicationContext
     private val prefs: SharedPreferences =
-        context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     var isGlobalOverlayEnabled: Boolean
         get() = prefs.getBoolean(KEY_GLOBAL_OVERLAY, false)
@@ -44,14 +45,18 @@ class AppPreferences(context: Context) {
     fun getValue(function: ControlFunction): Float =
         function.snapValue(prefs.getFloat(KEY_VAL_PREFIX + function.name, function.defaultInitialValue))
 
-    fun setValue(function: ControlFunction, value: Float) {
-        prefs.edit().putFloat(KEY_VAL_PREFIX + function.name, function.snapValue(value)).apply()
+    fun setValue(function: ControlFunction, value: Float, notifyVehicle: Boolean = true) {
+        val snapped = function.snapValue(value)
+        prefs.edit().putFloat(KEY_VAL_PREFIX + function.name, snapped).apply()
+        if (notifyVehicle) {
+            com.example.myapplication.vehicle.VehicleIntegrationManager.getInstance(appContext).updateVehicleValue(function, snapped)
+        }
     }
 
     /** 현재 값에서 [steps] 칸 조정한 뒤 저장하고 새 값을 반환한다. */
     fun adjustValue(function: ControlFunction, isClockwise: Boolean, steps: Int = 1): Float {
         val next = function.adjust(getValue(function), isClockwise, steps)
-        setValue(function, next)
+        setValue(function, next, notifyVehicle = true)
         return next
     }
 

@@ -35,6 +35,7 @@ import com.example.myapplication.ui.CircularGestureTouchListener
 class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: AppPreferences
+    private var beepSoundHelper: com.example.myapplication.util.BeepSoundHelper? = null
 
     private class DialViews(
         val side: DialSide,
@@ -73,10 +74,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         prefs = AppPreferences(this)
+        beepSoundHelper = com.example.myapplication.util.BeepSoundHelper(this)
         pendingOverlayEnable = savedInstanceState?.getBoolean(STATE_PENDING_OVERLAY, false) ?: false
 
         bindViews()
         refreshAll()
+    }
+
+    override fun onDestroy() {
+        beepSoundHelper?.release()
+        beepSoundHelper = null
+        super.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -172,7 +180,14 @@ class MainActivity : AppCompatActivity() {
                 getSensitivityDeg = { prefs.getSensitivityAngleDeg() },
                 onGestureStart = {},
                 onRotationStep = { isClockwise, steps ->
-                    prefs.adjustValue(prefs.getFunction(side), isClockwise, steps)
+                    val func = prefs.getFunction(side)
+                    val currentValue = prefs.getValue(func)
+                    if (func.isAtBoundary(currentValue, isClockwise)) {
+                        beepSoundHelper?.playBoundaryWarningBeep()
+                    } else {
+                        beepSoundHelper?.playStepBeep()
+                    }
+                    prefs.adjustValue(func, isClockwise, steps)
                     dials.forEach { renderDial(it) }
                     notifySettingsChanged()
                 },

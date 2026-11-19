@@ -133,4 +133,18 @@ class ControlFunctionTest {
             assertEquals(it.defaultInitialValue, it.snapValue(it.defaultInitialValue), 0.0001f)
         }
     }
+
+    @Test
+    fun isAtBoundary_detectsMinAndMaxLimitsCorrectly() {
+        ControlFunction.entries.forEach { f ->
+            assertTrue(f.isAtBoundary(f.maxValue, isClockwise = true))
+            org.junit.Assert.assertFalse(f.isAtBoundary(f.maxValue, isClockwise = false))
+
+            assertTrue(f.isAtBoundary(f.minValue, isClockwise = false))
+            org.junit.Assert.assertFalse(f.isAtBoundary(f.minValue, isClockwise = true))
+
+            org.junit.Assert.assertFalse(f.isAtBoundary(f.defaultInitialValue, isClockwise = true))
+            org.junit.Assert.assertFalse(f.isAtBoundary(f.defaultInitialValue, isClockwise = false))
+        }
+    }
 }

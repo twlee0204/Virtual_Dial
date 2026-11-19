@@ -26,7 +26,8 @@ class CircularGestureTouchListener(
     private val getSensitivityDeg: () -> Double = { 16.0 },
     private val onGestureStart: () -> Unit,
     private val onRotationStep: (isClockwise: Boolean, stepCount: Int) -> Unit,
-    private val onGestureEnd: () -> Unit
+    private val onGestureEnd: () -> Unit,
+    private val onShortTap: (() -> Unit)? = null
 ) : View.OnTouchListener {
 
     private val tracker = RotationTracker()
@@ -176,7 +177,10 @@ class CircularGestureTouchListener(
         tracker.stop()
         v.isPressed = false
         v.parent?.requestDisallowInterceptTouchEvent(false)
-        if (performClick) v.performClick()
+        if (performClick) {
+            v.performClick()
+            onShortTap?.invoke()
+        }
         if (wasActive) {
             fade(0f, fadeDelay, 200)
             onGestureEnd()
